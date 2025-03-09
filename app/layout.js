@@ -1,15 +1,9 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import Header from "@/components/Header";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "EduSense",
@@ -20,7 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
        <head />
-        <body>
+        <body className={`${inter.className}`}>
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
@@ -28,6 +22,8 @@ export default function RootLayout({ children }) {
             disableTransitionOnChange
           >
             {/* header */}
+            <Header />
+            {/* main content */}
             <main className="min-h-screen">
             {children}
             </main>
