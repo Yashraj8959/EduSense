@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
 
     <html lang="en" suppressHydrationWarning>
        <head />
-        <body className={`${inter.className}`}>
+        <body className={`${inter.className} dark`}>
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
@@ -32,12 +32,12 @@ export default function RootLayout({ children }) {
             {/* header */}
             <Header />
             {/* main content */}
-            <main className="min-h-screen">
+            <main className="min-h-screen w-full">
             {children}
             </main>
             {/* footer */}
-            <footer className="bg-muted/50 py-12">
-              <div className="container mx-auto px-4 text-center text-gray-200">
+            <footer className="bg-muted/80 py-12">
+              <div className="container mx-auto px-4 text-center text-muted-foreground">
               <p>&copy; 2022 EduSense</p>
               </div>
             </footer>
