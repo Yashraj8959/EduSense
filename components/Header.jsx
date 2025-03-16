@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { Button } from "./ui/button";
+
 import {
   PenBox,
   LayoutDashboard,
@@ -9,7 +10,9 @@ import {
   ChevronDown,
   StarsIcon,
 } from "lucide-react";
+
 import Link from 'next/link'
+
 import {
     ClerkProvider,
     SignInButton,
@@ -18,6 +21,7 @@ import {
     SignedOut,
     UserButton,
   } from '@clerk/nextjs'
+
   import {
     DropdownMenu,
     DropdownMenuContent,
@@ -25,9 +29,12 @@ import {
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu";
 
-const Header = () => {
+import { checkUser } from '@/lib/checkUser';
+
+const Header = async () => {
+  await checkUser();
   return (
-    <ClerkProvider>
+    // <ClerkProvider>
     <header className="fixed top-0 w-full border-b bg-background/80 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
       <Link href="/">
@@ -112,7 +119,7 @@ const Header = () => {
         </div>
       </nav>
     </header>
-    </ClerkProvider>
+    // </ClerkProvider>
   )
 }
 
