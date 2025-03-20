@@ -25,6 +25,7 @@ export const generateAIInsights = async (industry) => {
             Include at least 5 common roles for salary ranges.
             Growth rate should be a percentage.
             Include at least 5 skills and trends.
+            Salary ranges should be in Lakhs Per Annum (LPA).
           `;
   
     const result = await model.generateContent(prompt);
@@ -34,26 +35,27 @@ export const generateAIInsights = async (industry) => {
   
     return JSON.parse(cleanedText);
   };
+
 export async function getIndustryInsights() {
     const { userId } = await auth();
-    if (!userId) throw new Error("Unauthenticated user");
+    if (!userId) throw new Error("Unauthorized user");
 
     const user = await db.user.findUnique({
         where: {
             clerkUserId: userId,
         },
         include: {
-            industryInsights: true,
+            industryInsight: true,
         },
     });
     if (!user) throw new Error("User not found");
 
     // If no insights exist, generate them
-    if (!user.industryInsights) {
+    if (!user.industryInsight) {
         const insights = await generateAIInsights(user.industry);
 
         const industryInsight = await db.industryInsight.create({
-            date: {
+            data: {
                 industry: user.industry,
                 ...insights,
                 nextUpdate: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
