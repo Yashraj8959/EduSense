@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 const IndustryInsightsPage = async () => {
     const {isOnboarded} = await getUserOnboardingStatus();
-    if(isOnboarded){
+    if(!isOnboarded){
         redirect("/onboarding");
     }
     return <div> IndustryInsigntPage</div>;
