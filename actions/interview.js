@@ -128,6 +128,7 @@ export async function saveQuizResult(questions, answers, score) {
   }
 }
 
+// fetch the assessment information
 export async function getAssessments() {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
@@ -144,7 +145,7 @@ export async function getAssessments() {
         userId: user.id,
       },
       orderBy: {
-        createdAt: "asc",
+        createdAt: "asc", // assending order
       },
     });
 
