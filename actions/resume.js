@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache";
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
-export async function saveResume(content) {
+export async function saveResume(data) {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
 
@@ -24,11 +24,11 @@ export async function saveResume(content) {
         userId: user.id,
       },
       update: {
-        content,
+        content: JSON.stringify(data), // Serialize the data object to a JSON string,
       },
       create: {
         userId: user.id,
-        content,
+        content: JSON.stringify(data), // Serialize the data object to a JSON string,
       },
     });
 
